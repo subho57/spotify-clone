@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 /**
- * Created by jun on 12/27/17.
+ * Created by subho57
  */
 
 public class SplashActivity extends AppCompatActivity {

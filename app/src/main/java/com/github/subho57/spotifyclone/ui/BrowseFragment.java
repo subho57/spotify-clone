@@ -23,7 +23,7 @@ import com.squareup.picasso.Transformation;
 import java.util.List;
 
 /**
- * Created by jun on 12/28/17.
+ * Created by subho57
  */
 
 public class BrowseFragment extends Fragment {

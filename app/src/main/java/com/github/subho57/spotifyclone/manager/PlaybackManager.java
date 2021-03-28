@@ -5,7 +5,7 @@ import android.os.Parcelable;
 import com.github.subho57.spotifyclone.model.Music;
 
 /**
- * Created by jun on 12/31/17.
+ * Created by subho57
  */
 
 public class PlaybackManager {
