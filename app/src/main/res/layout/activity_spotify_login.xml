@@ -7,7 +7,7 @@
     android:background="@color/colorPrimaryDark"
     android:gravity="center|top"
     android:orientation="vertical"
-    tools:context="com.sodastudio.jun.spotify_demo.SpotifyLoginActivity">
+    tools:context="com.github.subho57.spotifyclone.SpotifyLoginActivity">
 
     <ImageView
         android:padding="40dp"
