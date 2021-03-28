@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/colorPrimaryDark"
-    android:padding="12dp"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimaryDark"
+    android:padding="12dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,32 +14,32 @@
             android:id="@+id/search_artist_image_field"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/maroon_sample_album"/>
+            android:src="@drawable/maroon_sample_album" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
             android:layout_gravity="center"
+            android:layout_marginStart="15dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/search_artist_name"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:text="Maroon 5"
+                android:textAlignment="textStart"
                 android:textColor="@color/colorWhite"
                 android:textSize="15sp"
-                android:textStyle="bold"
-                android:textAlignment="textStart"
-                android:text="Maroon 5"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:textColor="@color/colorNavIcon"
-                android:textSize="12sp"
+                android:text="Artist"
                 android:textAlignment="textStart"
-                android:text="Artist"/>
+                android:textColor="@color/colorNavIcon"
+                android:textSize="12sp" />
 
         </LinearLayout>
     </LinearLayout>
@@ -49,8 +48,8 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_close_black_24dp"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="13dp"
-        android:layout_alignParentEnd="true"/>
+        android:src="@drawable/ic_close_black_24dp" />
 
 </RelativeLayout>

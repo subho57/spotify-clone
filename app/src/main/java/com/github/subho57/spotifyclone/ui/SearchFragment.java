@@ -21,8 +21,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.github.subho57.spotifyclone.R;
-import com.github.subho57.spotifyclone.manager.PlaybackManager;
 import com.github.subho57.spotifyclone.manager.ListManager;
+import com.github.subho57.spotifyclone.manager.PlaybackManager;
 import com.github.subho57.spotifyclone.model.ArtistSearch;
 
 import java.util.List;
@@ -35,23 +35,50 @@ import iammert.com.view.scalinglib.State;
  * Created by subho57
  */
 
-public class SearchFragment extends Fragment{
+public class SearchFragment extends Fragment {
 
     private static final String TAG = "Spotify SearchFragment";
-
+    FragmentManager fragmentManager;
     private TextView textViewSearch;
     private EditText editTextSearch;
     private ScalingLayout scalingLayout;
+    View.OnClickListener mListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.search_text_button:
+                    String query = editTextSearch.getText().toString();
+
+                    Log.d(TAG, "Query: " + query);
+
+                    scalingLayout.collapse();
+
+                    if (query.equals("")) {
+                        textViewSearch.setText("Search");
+                    } else {
+
+                        fragmentManager = getFragmentManager();
+                        FragmentTransaction ft = fragmentManager.beginTransaction();
+                        ft.add(R.id.fragment, SearchResultFragment.newInstance(query))
+                                .addToBackStack(TAG)
+                                .commit();
+
+
+                        textViewSearch.setText(query);
+                    }
+
+                    break;
+            }
+        }
+    };
     private RecyclerView searchListView;
     private ArtistListAdapter mAdapter;
 
-    FragmentManager fragmentManager;
-
     @SuppressLint("ResourceType")
-    public static SearchFragment getFragmentInstance(FragmentManager fm, String tag){
-        SearchFragment fragment = (SearchFragment)fm.findFragmentByTag(tag);
+    public static SearchFragment getFragmentInstance(FragmentManager fm, String tag) {
+        SearchFragment fragment = (SearchFragment) fm.findFragmentByTag(tag);
 
-        if(fragment == null){
+        if (fragment == null) {
             fragment = new SearchFragment();
 
             FragmentTransaction ft = fm.beginTransaction();
@@ -69,8 +96,7 @@ public class SearchFragment extends Fragment{
 
         // check if the previous state is SearchResultFragment
         PlaybackManager manager = PlaybackManager.getInstance();
-        if(manager.isSearchResultFragmentAdded())
-        {
+        if (manager.isSearchResultFragmentAdded()) {
             fragmentManager = getFragmentManager();
             FragmentTransaction ft = fragmentManager.beginTransaction();
             ft.add(R.id.fragment, SearchResultFragment.newInstance("empty"))
@@ -158,7 +184,7 @@ public class SearchFragment extends Fragment{
                 if (scalingLayout.getState() == State.EXPANDED) {
                     scalingLayout.collapse();
 
-                    if(editTextSearch.getText().toString().equals(""))
+                    if (editTextSearch.getText().toString().equals(""))
                         textViewSearch.setText("Search");
                 }
             }
@@ -167,43 +193,11 @@ public class SearchFragment extends Fragment{
         return view;
     }
 
-    View.OnClickListener mListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            switch (view.getId()){
-                case R.id.search_text_button:
-                    String query = editTextSearch.getText().toString();
-
-                    Log.d(TAG, "Query: " + query);
-
-                    scalingLayout.collapse();
-
-                    if(query.equals("")){
-                        textViewSearch.setText("Search");
-                    } else {
-
-                        fragmentManager = getFragmentManager();
-                        FragmentTransaction ft = fragmentManager.beginTransaction();
-                        ft.add(R.id.fragment, SearchResultFragment.newInstance(query))
-                                .addToBackStack(TAG)
-                                .commit();
-
-
-
-                        textViewSearch.setText(query);
-                    }
-
-                    break;
-            }
-        }
-    };
-
-    public void refresh(){
+    public void refresh() {
         mAdapter.notifyDataSetChanged();
     }
 
-    private class ArtistListHolder extends RecyclerView.ViewHolder
-    {
+    private class ArtistListHolder extends RecyclerView.ViewHolder {
         private TextView artistName;
         private ImageView artistImage;
         private ArtistSearch artistSearch;
@@ -215,8 +209,7 @@ public class SearchFragment extends Fragment{
             artistName = itemView.findViewById(R.id.search_artist_name);
         }
 
-        private void bindArtist(ArtistSearch search)
-        {
+        private void bindArtist(ArtistSearch search) {
             artistSearch = search;
 
             artistName.setText(artistSearch.getName());
@@ -224,11 +217,10 @@ public class SearchFragment extends Fragment{
         }
     }
 
-    private class ArtistListAdapter extends RecyclerView.Adapter<ArtistListHolder>
-    {
+    private class ArtistListAdapter extends RecyclerView.Adapter<ArtistListHolder> {
         private List<ArtistSearch> artistSearchList;
 
-        private ArtistListAdapter(List<ArtistSearch> list){
+        private ArtistListAdapter(List<ArtistSearch> list) {
             artistSearchList = list;
         }
 

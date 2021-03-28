@@ -20,9 +20,9 @@ import android.widget.TextView;
 import com.github.subho57.spotifyclone.MainActivity;
 import com.github.subho57.spotifyclone.R;
 import com.github.subho57.spotifyclone.TrackDetailActivity;
+import com.github.subho57.spotifyclone.manager.ListManager;
 import com.github.subho57.spotifyclone.manager.PlaybackManager;
 import com.github.subho57.spotifyclone.manager.SearchPager;
-import com.github.subho57.spotifyclone.manager.ListManager;
 import com.github.subho57.spotifyclone.model.ArtistSearch;
 import com.github.subho57.spotifyclone.model.Music;
 import com.spotify.sdk.android.player.Error;
@@ -31,7 +31,6 @@ import com.spotify.sdk.android.player.SpotifyPlayer;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import kaaes.spotify.webapi.android.models.Track;
@@ -40,32 +39,26 @@ import kaaes.spotify.webapi.android.models.Track;
  * Created by subho57
  */
 
-public class SearchResultFragment extends Fragment implements SpotifyPlayer.NotificationCallback{
+public class SearchResultFragment extends Fragment implements SpotifyPlayer.NotificationCallback {
 
     public static final String QUERY = "QUERY";
     public static final String TAG = "Spotify SearchResult";
     public static final String DETAIL_MUSIC = "Detail Music";
-
+    Parcelable state;
     private String query;
-
     private Toolbar toolbar;
     private ImageView background_album;
-
     private RecyclerView mRecyclerView;
     private TrackListAdapter mAdapter;
-
     private SearchPager mSearchPager;
     private SearchPager.CompleteListener mSearchListener;
     private SearchPager.ArtistListener mArtistListener;
-
     private ListManager listManager;
     private PlaybackManager playbackManager;
-
     private LinearLayoutManager layoutManager;
-
     private SpotifyPlayer mPlayer = MainActivity.mPlayer;
 
-    public static SearchResultFragment newInstance(String query){
+    public static SearchResultFragment newInstance(String query) {
         Bundle args = new Bundle();
         args.putString(QUERY, query);
 
@@ -105,7 +98,7 @@ public class SearchResultFragment extends Fragment implements SpotifyPlayer.Noti
 
         layoutManager = new LinearLayoutManager(getActivity());
 
-        if(state != null){
+        if (state != null) {
             layoutManager.onRestoreInstanceState(state);
         }
 
@@ -128,7 +121,7 @@ public class SearchResultFragment extends Fragment implements SpotifyPlayer.Noti
 
         background_album = view.findViewById(R.id.background_album_field);
 
-        if(!query.equals("empty")) {
+        if (!query.equals("empty")) {
             queryData();
         } else {
             updateView();
@@ -137,7 +130,7 @@ public class SearchResultFragment extends Fragment implements SpotifyPlayer.Noti
         return view;
     }
 
-    private void queryData(){
+    private void queryData() {
 
         mSearchListener = new SearchPager.CompleteListener() {
             @Override
@@ -145,7 +138,7 @@ public class SearchResultFragment extends Fragment implements SpotifyPlayer.Noti
 
                 listManager.clearList();
 
-                for(Track track : items){
+                for (Track track : items) {
                     //Log.d(TAG, "success! link: " + track.uri);                      // music link
                     //Log.d(TAG, "success! title: " + track.name);                        // title
                     //Log.d(TAG, "success! album: " + track.album.name);                  // album name
@@ -162,7 +155,7 @@ public class SearchResultFragment extends Fragment implements SpotifyPlayer.Noti
                             track.duration_ms,
                             track.artists.get(0).name,
                             track.artists.get(0).id
-                            );
+                    );
 
                     listManager.addTrack(music);
                 }
@@ -180,13 +173,13 @@ public class SearchResultFragment extends Fragment implements SpotifyPlayer.Noti
         mSearchPager.getTracksFromSearch(query, mSearchListener);
     }
 
-    private void updateView(){
+    private void updateView() {
 
         List<Music> mList = listManager.getTrackLists();
 
-        if(mList.size() == 0) return;
+        if (mList.size() == 0) return;
 
-        if(mAdapter == null)
+        if (mAdapter == null)
             mAdapter = new TrackListAdapter(mList);
 
         mRecyclerView.setAdapter(mAdapter);
@@ -227,11 +220,10 @@ public class SearchResultFragment extends Fragment implements SpotifyPlayer.Noti
         mSearchPager.getArtist(mList.get(0).getArtist_id(), mArtistListener);
     }
 
-
     @Override
     public void onPlaybackEvent(PlayerEvent playerEvent) {
 
-        if(!playerEvent.name().contains("Metadata"))
+        if (!playerEvent.name().contains("Metadata"))
             Log.d(TAG, "Playback event received: " + playerEvent.name());
 
         switch (playerEvent.name()) {
@@ -248,9 +240,9 @@ public class SearchResultFragment extends Fragment implements SpotifyPlayer.Noti
 
                 Music music = ListManager.getInstance().findCurrentMusic(title, album);
 
-                if(music != null)
+                if (music != null)
                     music.setPlaying(false);
-                if(mAdapter != null)
+                if (mAdapter != null)
                     mAdapter.notifyDataSetChanged();
 
                 break;
@@ -271,15 +263,49 @@ public class SearchResultFragment extends Fragment implements SpotifyPlayer.Noti
 
     }
 
-    private class TrackListHolder extends RecyclerView.ViewHolder
-    {
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause");
+
+        state = layoutManager.onSaveInstanceState();
+
+        playbackManager = PlaybackManager.getInstance();
+        playbackManager.setState(state);
+
+
+        Fragment fragment = getFragmentManager().findFragmentByTag("SearchFragment");
+        ((SearchFragment) fragment).refresh();
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Log.d(TAG, "onViewCreated");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d(TAG, "onDestroyView");
+
+
+    }
+
+    private class TrackListHolder extends RecyclerView.ViewHolder {
         private Music music;
         private TextView title_text;
         private TextView artist_text;
         private TextView album_text;
         private ImageButton more_button;
 
-        private TrackListHolder(final View itemView){
+        private TrackListHolder(final View itemView) {
             super(itemView);
 
             title_text = itemView.findViewById(R.id.title_field);
@@ -339,20 +365,19 @@ public class SearchResultFragment extends Fragment implements SpotifyPlayer.Noti
             });
         }
 
-        private void bindMusic(Music m)
-        {
+        private void bindMusic(Music m) {
             music = m;
 
             String title = music.getTitle();
             String album = music.getAlbum();
 
-            if(title.length() > 40){
+            if (title.length() > 40) {
                 title = title.substring(0, 40);
                 title += "...";
             }
 
-            if(album.length() > 40){
-                album = album.substring(0,40);
+            if (album.length() > 40) {
+                album = album.substring(0, 40);
                 album += "...";
             }
 
@@ -360,7 +385,7 @@ public class SearchResultFragment extends Fragment implements SpotifyPlayer.Noti
             artist_text.setText(music.getArtist());
             album_text.setText(album);
 
-            if(music.isPlaying())
+            if (music.isPlaying())
                 title_text.setTextColor(getResources().getColor(R.color.colorAccent, null));
             else
                 title_text.setTextColor(getResources().getColor(R.color.colorWhite, null));
@@ -369,10 +394,11 @@ public class SearchResultFragment extends Fragment implements SpotifyPlayer.Noti
         }
     }
 
-    private class TrackListAdapter extends RecyclerView.Adapter<TrackListHolder>{
+    private class TrackListAdapter extends RecyclerView.Adapter<TrackListHolder> {
 
         private List<Music> musicList;
-        private TrackListAdapter(List<Music> list){
+
+        private TrackListAdapter(List<Music> list) {
             musicList = list;
         }
 
@@ -397,43 +423,6 @@ public class SearchResultFragment extends Fragment implements SpotifyPlayer.Noti
         public int getItemCount() {
             return musicList.size();
         }
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume");
-    }
-
-    Parcelable state;
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause");
-
-        state = layoutManager.onSaveInstanceState();
-
-        playbackManager = PlaybackManager.getInstance();
-        playbackManager.setState(state);
-
-
-        Fragment fragment = getFragmentManager().findFragmentByTag("SearchFragment");
-        ((SearchFragment)fragment).refresh();
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        Log.d(TAG, "onViewCreated");
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.d(TAG, "onDestroyView");
-
 
     }
 

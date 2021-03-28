@@ -16,8 +16,8 @@ public class PlaybackManager {
     private Parcelable state;
     private boolean SearchResultFragmentAdded = false;
 
-    public static PlaybackManager getInstance(){
-        if(manager == null){
+    public static PlaybackManager getInstance() {
+        if (manager == null) {
             manager = new PlaybackManager();
         }
 

@@ -39,39 +39,18 @@ public class SearchPager {
 
     private SpotifyService spotifyService = MainActivity.spotifyService;
 
-    public interface CompleteListener {
-        void onComplete(List<Track> items);
-        void onError(Throwable error);
-    }
-    public interface ArtistListener{
-        void onComplete(String url);
-        void onError(Throwable error);
-    }
-    public interface onCompleteListener {
-        void onComplete();
-        void onError(Throwable error);
-    }
-    public interface onCompleteTopArtistListener {
-        void onComplete();
-        void onError(Throwable error);
-    }
-    public interface onCompleteTopTrackListener {
-        void onComplete();
-        void onError(Throwable error);
-    }
-
-    public static SearchPager getInstance(Context context){
-        if(searchPager == null){
+    public static SearchPager getInstance(Context context) {
+        if (searchPager == null) {
             searchPager = new SearchPager();
         }
         return searchPager;
     }
 
-    public void getTracksFromSearch(String query, CompleteListener listener){
+    public void getTracksFromSearch(String query, CompleteListener listener) {
         getData(query, listener);
     }
 
-    private void getData(String query, final CompleteListener listener){
+    private void getData(String query, final CompleteListener listener) {
 
         spotifyService.searchTracks(query, new SpotifyCallback<TracksPager>() {
             @Override
@@ -86,7 +65,7 @@ public class SearchPager {
         });
     }
 
-    public void getArtist(String id, final ArtistListener listener){
+    public void getArtist(String id, final ArtistListener listener) {
 
         spotifyService.getArtist(id, new SpotifyCallback<Artist>() {
             @Override
@@ -103,7 +82,7 @@ public class SearchPager {
         });
     }
 
-    public void getMyTopArtist(final onCompleteTopArtistListener listener){
+    public void getMyTopArtist(final onCompleteTopArtistListener listener) {
 
         Map<String, Object> options = new HashMap<>();
         options.put(SpotifyService.LIMIT, 10);
@@ -115,7 +94,7 @@ public class SearchPager {
             public void failure(SpotifyError spotifyError) {
                 Log.d("SearchPager", spotifyError.toString());
 
-                if(listener != null)
+                if (listener != null)
                     listener.onError(spotifyError);
             }
 
@@ -123,23 +102,23 @@ public class SearchPager {
             public void success(Pager<Artist> artistPager, Response response) {
                 List<Artist> mList = artistPager.items;
 
-                for(Artist art : mList){
+                for (Artist art : mList) {
                     Log.d("SearchPager", art.name);
                     Log.d("SearchPager", art.images.get(1).url);
 
                     listManager.addTopArtist(new TopArtist(art.name, art.images.get(1).url));
                 }
 
-                if(listener != null)
+                if (listener != null)
                     listener.onComplete();
-                else{
+                else {
                     Log.d("SearchPager", "What is happening?");
                 }
             }
         });
     }
 
-    public void getMyTopTracks(final onCompleteTopTrackListener listener){
+    public void getMyTopTracks(final onCompleteTopTrackListener listener) {
         Map<String, Object> options = new HashMap<>();
         options.put(SpotifyService.LIMIT, 10);
 
@@ -150,7 +129,7 @@ public class SearchPager {
             public void failure(SpotifyError spotifyError) {
                 Log.d("SearchPager", spotifyError.toString());
 
-                if(listener != null)
+                if (listener != null)
                     listener.onError(spotifyError);
             }
 
@@ -158,7 +137,7 @@ public class SearchPager {
             public void success(Pager<Track> trackPager, Response response) {
                 List<Track> tracks = trackPager.items;
 
-                for(Track track : tracks){
+                for (Track track : tracks) {
                     Log.d("SearchPager", track.album.name);
                     Log.d("SearchPager", track.album.images.get(1).url);
 
@@ -166,13 +145,13 @@ public class SearchPager {
 
                 }
 
-                if(listener != null)
+                if (listener != null)
                     listener.onComplete();
             }
         });
     }
 
-    public void getNewRelease(final onCompleteListener listener){
+    public void getNewRelease(final onCompleteListener listener) {
         Map<String, Object> options = new HashMap<>();
         options.put(SpotifyService.OFFSET, 0);  // 0 ~ 5 6 ~ 10
         options.put(SpotifyService.LIMIT, 10);
@@ -184,7 +163,7 @@ public class SearchPager {
             public void failure(SpotifyError spotifyError) {
                 Log.d("SearchPager", spotifyError.toString());
 
-                if(listener != null)
+                if (listener != null)
                     listener.onError(spotifyError);
             }
 
@@ -192,7 +171,7 @@ public class SearchPager {
             public void success(NewReleases newReleases, Response response) {
                 List<AlbumSimple> albums = newReleases.albums.items;
 
-                for(final AlbumSimple albumSimple : albums){
+                for (final AlbumSimple albumSimple : albums) {
                     //Log.d("SearchPage", albumSimple.name);
                     //Log.d("SearchPage", albumSimple.id);
                     //Log.d("SearchPage", albumSimple.uri);
@@ -204,7 +183,7 @@ public class SearchPager {
                         public void failure(SpotifyError spotifyError) {
                             Log.d("SearchPage Followup", spotifyError.toString());
 
-                            if(listener != null)
+                            if (listener != null)
                                 listener.onError(spotifyError);
                         }
 
@@ -218,7 +197,7 @@ public class SearchPager {
                             List<ArtistSimple> list = album.artists;
                             List<String> artists = new ArrayList<>();
 
-                            for(ArtistSimple simple : list){
+                            for (ArtistSimple simple : list) {
                                 Log.d("SearchPage Followup", simple.name);
                                 artists.add(simple.name);
                             }
@@ -232,13 +211,13 @@ public class SearchPager {
                     });
                 }
 
-                if(listener != null)
+                if (listener != null)
                     listener.onComplete();
             }
         });
     }
 
-    public void getMyPlayList(){
+    public void getMyPlayList() {
         Map<String, Object> options = new HashMap<>();
         options.put(SpotifyService.LIMIT, 30);
 
@@ -252,7 +231,7 @@ public class SearchPager {
             public void success(Pager<PlaylistSimple> playlistSimplePager, Response response) {
                 List<PlaylistSimple> simples = playlistSimplePager.items;
 
-                for(PlaylistSimple simple : simples){
+                for (PlaylistSimple simple : simples) {
                     Log.d("SearchPager", simple.name);
                     Log.d("SearchPager", simple.images.get(1).url);
                 }
@@ -261,7 +240,7 @@ public class SearchPager {
         });
     }
 
-    public void getFeatured(){
+    public void getFeatured() {
 
         spotifyService.getFeaturedPlaylists(new SpotifyCallback<FeaturedPlaylists>() {
             @Override
@@ -273,8 +252,7 @@ public class SearchPager {
             public void success(FeaturedPlaylists featuredPlaylists, Response response) {
                 List<PlaylistSimple> mlist = featuredPlaylists.playlists.items;
 
-                for(PlaylistSimple simple : mlist)
-                {
+                for (PlaylistSimple simple : mlist) {
                     Log.d("SearchPager Simple", simple.name);
                     Log.d("SearchPager Simple", simple.images.get(0).url);
 
@@ -282,6 +260,36 @@ public class SearchPager {
                 }
             }
         });
+    }
+
+    public interface CompleteListener {
+        void onComplete(List<Track> items);
+
+        void onError(Throwable error);
+    }
+
+    public interface ArtistListener {
+        void onComplete(String url);
+
+        void onError(Throwable error);
+    }
+
+    public interface onCompleteListener {
+        void onComplete();
+
+        void onError(Throwable error);
+    }
+
+    public interface onCompleteTopArtistListener {
+        void onComplete();
+
+        void onError(Throwable error);
+    }
+
+    public interface onCompleteTopTrackListener {
+        void onComplete();
+
+        void onError(Throwable error);
     }
 
 }

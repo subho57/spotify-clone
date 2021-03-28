@@ -1,13 +1,13 @@
 package com.github.subho57.spotifyclone.ui;
 
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,14 +25,96 @@ import com.github.subho57.spotifyclone.R;
 public class MainFragment extends Fragment {
 
     private static final String TAG = "Spotify MainFragment";
-
+    Drawable home;
+    Drawable browse;
+    Drawable search;
+    Drawable radio;
+    Drawable library;
+    int focusMode;
+    int defocusMode;
+    int prev_clicked_id = -1;
+    View prev_view;
     private FragmentManager manager;
-
     private TextView homeText;
     private TextView browseText;
     private TextView searchText;
     private TextView radioText;
     private TextView libraryText;
+    View.OnClickListener mListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            view.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.nav_click));
+
+            switch (view.getId()) {
+                case R.id.nav_home:
+                    Log.d(TAG, "HOME");
+
+                    if (view.isActivated()) break;
+
+                    manager.beginTransaction().replace(R.id.fragment, new HomeFragment()).commit();
+
+                    setFocus(R.id.nav_home, view);
+                    setDeFocus(prev_clicked_id, prev_view);
+
+                    prev_clicked_id = R.id.nav_home;
+                    prev_view = view;
+                    break;
+                case R.id.nav_browse:
+                    Log.d(TAG, "BROWSE");
+
+                    if (view.isActivated()) break;
+
+                    manager.beginTransaction().replace(R.id.fragment, new BrowseFragment()).commit();
+
+                    setFocus(R.id.nav_browse, view);
+                    setDeFocus(prev_clicked_id, prev_view);
+
+                    prev_clicked_id = R.id.nav_browse;
+                    prev_view = view;
+                    break;
+                case R.id.nav_search:
+                    Log.d(TAG, "SEARCH");
+
+                    if (view.isActivated()) break;
+
+                    SearchFragment.getFragmentInstance(manager, "SearchFragment");
+
+                    setFocus(R.id.nav_search, view);
+                    setDeFocus(prev_clicked_id, prev_view);
+
+                    prev_clicked_id = R.id.nav_search;
+                    prev_view = view;
+                    break;
+                case R.id.nav_radio:
+                    Log.d(TAG, "RADIO");
+
+                    if (view.isActivated()) break;
+
+                    manager.beginTransaction().replace(R.id.fragment, new RadioFragment()).commit();
+
+                    setFocus(R.id.nav_radio, view);
+                    setDeFocus(prev_clicked_id, prev_view);
+
+                    prev_clicked_id = R.id.nav_radio;
+                    prev_view = view;
+                    break;
+                case R.id.nav_library:
+                    Log.d(TAG, "LIBRARY");
+
+                    if (view.isActivated()) break;
+
+                    manager.beginTransaction().replace(R.id.fragment, new LibraryFragment()).commit();
+
+                    setFocus(R.id.nav_library, view);
+                    setDeFocus(prev_clicked_id, prev_view);
+
+                    prev_clicked_id = R.id.nav_library;
+                    prev_view = view;
+                    break;
+            }
+        }
+    };
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,17 +153,6 @@ public class MainFragment extends Fragment {
         return view;
     }
 
-    Drawable home;
-    Drawable browse;
-    Drawable search;
-    Drawable radio;
-    Drawable library;
-    int focusMode;
-    int defocusMode;
-
-    int prev_clicked_id = -1;
-    View prev_view;
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -92,90 +163,13 @@ public class MainFragment extends Fragment {
         radio = getResources().getDrawable(R.drawable.ic_radio_black_24dp, null);
         library = getResources().getDrawable(R.drawable.ic_library_music_black_24dp, null);
 
-        focusMode = getResources().getColor(R.color.colorWhite, null);;
+        focusMode = getResources().getColor(R.color.colorWhite, null);
+        ;
         defocusMode = getResources().getColor(R.color.colorNavIcon, null);
     }
 
-    View.OnClickListener mListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
-            view.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.nav_click));
-
-            switch (view.getId())
-            {
-                case R.id.nav_home:
-                    Log.d(TAG, "HOME");
-
-                    if(view.isActivated()) break;
-
-                    manager.beginTransaction().replace(R.id.fragment, new HomeFragment()).commit();
-
-                    setFocus(R.id.nav_home, view);
-                    setDeFocus(prev_clicked_id, prev_view);
-
-                    prev_clicked_id = R.id.nav_home;
-                    prev_view = view;
-                    break;
-                case R.id.nav_browse:
-                    Log.d(TAG, "BROWSE");
-
-                    if(view.isActivated()) break;
-
-                    manager.beginTransaction().replace(R.id.fragment, new BrowseFragment()).commit();
-
-                    setFocus(R.id.nav_browse, view);
-                    setDeFocus(prev_clicked_id, prev_view);
-
-                    prev_clicked_id = R.id.nav_browse;
-                    prev_view = view;
-                    break;
-                case R.id.nav_search:
-                    Log.d(TAG, "SEARCH");
-
-                    if(view.isActivated()) break;
-
-                    SearchFragment.getFragmentInstance(manager, "SearchFragment");
-
-                    setFocus(R.id.nav_search, view);
-                    setDeFocus(prev_clicked_id, prev_view);
-
-                    prev_clicked_id = R.id.nav_search;
-                    prev_view = view;
-                    break;
-                case R.id.nav_radio:
-                    Log.d(TAG, "RADIO");
-
-                    if(view.isActivated()) break;
-
-                    manager.beginTransaction().replace(R.id.fragment, new RadioFragment()).commit();
-
-                    setFocus(R.id.nav_radio, view);
-                    setDeFocus(prev_clicked_id, prev_view);
-
-                    prev_clicked_id = R.id.nav_radio;
-                    prev_view = view;
-                    break;
-                case R.id.nav_library:
-                    Log.d(TAG, "LIBRARY");
-
-                    if(view.isActivated()) break;
-
-                    manager.beginTransaction().replace(R.id.fragment, new LibraryFragment()).commit();
-
-                    setFocus(R.id.nav_library, view);
-                    setDeFocus(prev_clicked_id, prev_view);
-
-                    prev_clicked_id = R.id.nav_library;
-                    prev_view = view;
-                    break;
-            }
-        }
-    };
-
-    private void setFocus(int res_id, View view){
-        switch (res_id)
-        {
+    private void setFocus(int res_id, View view) {
+        switch (res_id) {
             case R.id.nav_home:
                 home.setTint(focusMode);
                 view.setBackground(home);
@@ -213,9 +207,9 @@ public class MainFragment extends Fragment {
                 break;
         }
     }
-    private void setDeFocus(int res_id, View view){
-        switch (res_id)
-        {
+
+    private void setDeFocus(int res_id, View view) {
+        switch (res_id) {
             case R.id.nav_home:
                 home.setTint(defocusMode);
                 view.setBackground(home);

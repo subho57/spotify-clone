@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:background="@color/colorPrimaryDark"
-    android:padding="10dp"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <ImageView
         android:id="@+id/new_album_image"
         android:layout_width="160dp"
         android:layout_height="160dp"
-        android:src="@drawable/maroon_sample_album"/>
+        android:src="@drawable/maroon_sample_album" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,22 +22,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="1dp"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            android:textColor="@color/colorWhite"
+            android:text="Bring in Back (with Drake / Mike Will Made-it)"
             android:textAlignment="center"
-            android:text="Bring in Back (with Drake / Mike Will Made-it)"/>
+            android:textColor="@color/colorWhite"
+            android:textSize="13sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/new_artist_name"
             android:layout_width="match_parent"
             android:layout_height="37dp"
             android:padding="1dp"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:textColor="@color/colorNavIcon"
+            android:text="Playlist"
             android:textAlignment="center"
-            android:text="Playlist"/>
+            android:textColor="@color/colorNavIcon"
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
 
     </LinearLayout>

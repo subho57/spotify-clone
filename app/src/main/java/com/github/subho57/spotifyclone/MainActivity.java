@@ -1,8 +1,8 @@
 package com.github.subho57.spotifyclone;
 
 import android.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -18,9 +18,9 @@ import com.spotify.sdk.android.player.SpotifyPlayer;
 
 import kaaes.spotify.webapi.android.SpotifyApi;
 import kaaes.spotify.webapi.android.SpotifyService;
+
 public class MainActivity extends AppCompatActivity
-    implements ConnectionStateCallback
-{
+        implements ConnectionStateCallback {
 
     private static final String TAG = "Spotify MainActivity";
 
@@ -33,12 +33,9 @@ public class MainActivity extends AppCompatActivity
 
     public static SpotifyPlayer mPlayer;
     public static PlaybackState mCurrentPlaybackState;
-
-    private Toast mToast;
-
-    private String AUTH_TOKEN;
-
     public static SpotifyService spotifyService;
+    private Toast mToast;
+    private String AUTH_TOKEN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,16 +53,15 @@ public class MainActivity extends AppCompatActivity
 
     private void onAuthenticationComplete(final String auth_token) {
 
-        Log.d(TAG,"Got authentication token");
+        Log.d(TAG, "Got authentication token");
 
-        if(mPlayer == null)
-        {
+        if (mPlayer == null) {
             Config playerConfig = new Config(this, auth_token, SpotifyLoginActivity.CLIENT_ID);
 
             Spotify.getPlayer(playerConfig, this, new SpotifyPlayer.InitializationObserver() {
                 @Override
                 public void onInitialized(SpotifyPlayer spotifyPlayer) {
-                    Log.d(TAG,"-- Player initialized --");
+                    Log.d(TAG, "-- Player initialized --");
                     mPlayer = spotifyPlayer;
                     mPlayer.addConnectionStateCallback(MainActivity.this);
                     //mPlayer.addNotificationCallback(MainActivity.this);
@@ -87,7 +83,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void setServiceAPI(){
+    private void setServiceAPI() {
         Log.d(TAG, "Setting Spotify API Service");
         SpotifyApi api = new SpotifyApi();
         api.setAccessToken(AUTH_TOKEN);

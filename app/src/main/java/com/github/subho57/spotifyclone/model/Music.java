@@ -1,17 +1,24 @@
 package com.github.subho57.spotifyclone.model;
 
-import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import java.net.URL;
 
 /**
  * Created by subho57
  */
 
-public class Music implements Parcelable
-{
+public class Music implements Parcelable {
+    public static final Creator<Music> CREATOR = new Creator<Music>() {
+        @Override
+        public Music createFromParcel(Parcel in) {
+            return new Music(in);
+        }
+
+        @Override
+        public Music[] newArray(int size) {
+            return new Music[size];
+        }
+    };
     private String id;
     private String uri;
     private String title;
@@ -22,7 +29,7 @@ public class Music implements Parcelable
     private String artist_id;
     private boolean playing;
 
-    public Music(String i, String u, String t, String a, String a_img, long dura, String art, String art_id){
+    public Music(String i, String u, String t, String a, String a_img, long dura, String art, String art_id) {
         id = i;
         uri = u;
         title = t;
@@ -43,23 +50,13 @@ public class Music implements Parcelable
         artist = in.readString();
     }
 
-    public static final Creator<Music> CREATOR = new Creator<Music>() {
-        @Override
-        public Music createFromParcel(Parcel in) {
-            return new Music(in);
-        }
-
-        @Override
-        public Music[] newArray(int size) {
-            return new Music[size];
-        }
-    };
-
     public String getArtist_id() {
         return artist_id;
     }
 
-    public String getId() { return id; }
+    public String getId() {
+        return id;
+    }
 
     public String getUri() {
         return uri;

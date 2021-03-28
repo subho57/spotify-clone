@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,35 +9,35 @@
     tools:context="com.github.subho57.spotifyclone.SpotifyLoginActivity">
 
     <ImageView
-        android:padding="40dp"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/main_logo_white"/>
+        android:padding="40dp"
+        android:src="@drawable/main_logo_white" />
 
     <TextView
-        android:layout_marginTop="20dp"
         android:layout_width="200dp"
         android:layout_height="20dp"
-        android:textSize="15sp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
-        android:textStyle="bold"
         android:text="@string/welcome"
-        android:textColor="#ffffff"/>
+        android:textColor="#ffffff"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:textColor="@color/colorLoginPressed"
         android:gravity="center"
-        android:textSize="13sp"
-        android:text="@string/welcome_text"/>
+        android:text="@string/welcome_text"
+        android:textColor="@color/colorLoginPressed"
+        android:textSize="13sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="65dp"
-        android:padding="30dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="30dp">
 
         <Button
             android:layout_width="match_parent"
@@ -46,17 +45,17 @@
             android:background="@drawable/create_account_button"
             android:text="@string/create_account"
             android:textColor="#ffffff"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
-            android:textSize="12sp"
+            android:gravity="center"
             android:text="@string/already_user"
-            android:textColor="#ffffff"/>
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
 
         <Button
             android:id="@+id/login_button"
@@ -64,8 +63,8 @@
             android:layout_height="50dp"
             android:background="@drawable/round_rect"
             android:backgroundTint="#ffffff"
-            android:textStyle="bold"
-            android:text="@string/login_button"/>
+            android:text="@string/login_button"
+            android:textStyle="bold" />
 
     </LinearLayout>
 </LinearLayout>

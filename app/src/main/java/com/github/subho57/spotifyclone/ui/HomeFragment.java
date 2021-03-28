@@ -25,13 +25,11 @@ import com.squareup.picasso.Transformation;
 import java.util.ArrayList;
 import java.util.List;
 
-import kaaes.spotify.webapi.android.models.PlaylistSimple;
-
 /**
  * Created by subho57
  */
 
-public class HomeFragment extends Fragment{
+public class HomeFragment extends Fragment {
 
     public static final String TAG = "Spotify HomeFragment";
 
@@ -74,7 +72,7 @@ public class HomeFragment extends Fragment{
         return view;
     }
 
-    private void updateUI(){
+    private void updateUI() {
 
         setMadeForYou();
 
@@ -83,7 +81,7 @@ public class HomeFragment extends Fragment{
         setTopTracks();
     }
 
-    private void setMadeForYou(){
+    private void setMadeForYou() {
 
         ArrayList<SimplePlaylist> mlist = ListManager.getInstance().getSimplePlaylists();
 
@@ -92,16 +90,16 @@ public class HomeFragment extends Fragment{
             return;
         }
 
-        if(simpleListAdapter == null)
-            simpleListAdapter = new HorizontalSimpleListAdapter(mlist.subList(0,10));
+        if (simpleListAdapter == null)
+            simpleListAdapter = new HorizontalSimpleListAdapter(mlist.subList(0, 10));
 
         mMadeForYouRecyclerView.setAdapter(simpleListAdapter);
     }
 
-    private void setTopArtists(){
+    private void setTopArtists() {
         List<TopArtist> artists = ListManager.getInstance().getTopArtists();
 
-        if(artists.size() == 0){
+        if (artists.size() == 0) {
 
             artistListener = new SearchPager.onCompleteTopArtistListener() {
                 @Override
@@ -120,16 +118,16 @@ public class HomeFragment extends Fragment{
             SearchPager.getInstance(getContext()).getMyTopArtist(artistListener);
         }
 
-        if(artistAdapter == null)
+        if (artistAdapter == null)
             artistAdapter = new HorizontalArtistAdapter(artists);
 
         mTopArtistRecyclerView.setAdapter(artistAdapter);
     }
 
-    private void setTopTracks(){
+    private void setTopTracks() {
         List<TopTrack> tracks = ListManager.getInstance().getTopTracks();
 
-        if(tracks.size() == 0){
+        if (tracks.size() == 0) {
             trackListener = new SearchPager.onCompleteTopTrackListener() {
                 @Override
                 public void onComplete() {
@@ -147,14 +145,14 @@ public class HomeFragment extends Fragment{
             SearchPager.getInstance(getContext()).getMyTopTracks(trackListener);
         }
 
-        if(trackAdapter == null)
+        if (trackAdapter == null)
             trackAdapter = new HorizontalTrackAdapter(tracks);
 
         mTopTrackRecyclerView.setAdapter(trackAdapter);
 
     }
 
-    private class HorizontalTrackHolder extends RecyclerView.ViewHolder{
+    private class HorizontalTrackHolder extends RecyclerView.ViewHolder {
 
         private ImageView album_image_field;
         private TextView album_name_view;
@@ -166,7 +164,7 @@ public class HomeFragment extends Fragment{
             album_name_view = itemView.findViewById(R.id.track_name);
         }
 
-        private void bindTrack(final TopTrack track){
+        private void bindTrack(final TopTrack track) {
 
             album_name_view.setText(track.getName());
 
@@ -192,11 +190,11 @@ public class HomeFragment extends Fragment{
 
     }
 
-    private class HorizontalTrackAdapter extends RecyclerView.Adapter<HorizontalTrackHolder>{
+    private class HorizontalTrackAdapter extends RecyclerView.Adapter<HorizontalTrackHolder> {
 
         private List<TopTrack> tracks;
 
-        private HorizontalTrackAdapter(List<TopTrack> list){
+        private HorizontalTrackAdapter(List<TopTrack> list) {
             tracks = list;
         }
 
@@ -222,7 +220,7 @@ public class HomeFragment extends Fragment{
     }
 
 
-    private class HorizontalArtistHolder extends RecyclerView.ViewHolder{
+    private class HorizontalArtistHolder extends RecyclerView.ViewHolder {
 
         private TopArtist artist;
         private TextView artist_name_view;
@@ -235,7 +233,7 @@ public class HomeFragment extends Fragment{
             artist_image_field = itemView.findViewById(R.id.artist_image_field);
         }
 
-        private void bindArtist(final TopArtist artist){
+        private void bindArtist(final TopArtist artist) {
             this.artist = artist;
 
             artist_name_view.setText(artist.getName());
@@ -262,11 +260,11 @@ public class HomeFragment extends Fragment{
         }
     }
 
-    private class HorizontalArtistAdapter extends RecyclerView.Adapter<HorizontalArtistHolder>{
+    private class HorizontalArtistAdapter extends RecyclerView.Adapter<HorizontalArtistHolder> {
 
         private List<TopArtist> artists;
 
-        private HorizontalArtistAdapter(List<TopArtist> list){
+        private HorizontalArtistAdapter(List<TopArtist> list) {
             this.artists = list;
         }
 
@@ -292,8 +290,7 @@ public class HomeFragment extends Fragment{
     }
 
 
-
-    private class HorizontalSimpleListHolder extends RecyclerView.ViewHolder{
+    private class HorizontalSimpleListHolder extends RecyclerView.ViewHolder {
 
         private ImageView imageView;
         private TextView titleView;
@@ -305,7 +302,7 @@ public class HomeFragment extends Fragment{
             titleView = itemView.findViewById(R.id.playlist_album_title);
         }
 
-        private void bindItem(final SimplePlaylist simple){
+        private void bindItem(final SimplePlaylist simple) {
             titleView.setText(simple.getName());
 
             Picasso.with(getContext())
@@ -328,11 +325,11 @@ public class HomeFragment extends Fragment{
         }
     }
 
-    private class HorizontalSimpleListAdapter extends RecyclerView.Adapter<HorizontalSimpleListHolder>{
+    private class HorizontalSimpleListAdapter extends RecyclerView.Adapter<HorizontalSimpleListHolder> {
 
         private List<SimplePlaylist> testList;
 
-        private HorizontalSimpleListAdapter(List<SimplePlaylist> list){
+        private HorizontalSimpleListAdapter(List<SimplePlaylist> list) {
             testList = list;
         }
 

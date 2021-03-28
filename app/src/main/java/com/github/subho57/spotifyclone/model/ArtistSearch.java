@@ -20,7 +20,7 @@ public class ArtistSearch {
         return name;
     }
 
-    public Bitmap getImage(){
+    public Bitmap getImage() {
         return image;
     }
 }

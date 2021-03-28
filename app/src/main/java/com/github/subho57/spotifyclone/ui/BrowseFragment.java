@@ -56,11 +56,11 @@ public class BrowseFragment extends Fragment {
         return view;
     }
 
-    private void updateView(){
+    private void updateView() {
 
         List<AlbumNew> albumNewList = listManager.getAlbumNewArrayList();
 
-        if(albumNewList.size() == 0){
+        if (albumNewList.size() == 0) {
 
             listener = new SearchPager.onCompleteListener() {
                 @Override
@@ -79,14 +79,14 @@ public class BrowseFragment extends Fragment {
             SearchPager.getInstance(getContext()).getNewRelease(listener);
         }
 
-        if(mAdapter == null)
+        if (mAdapter == null)
             mAdapter = new newAlbumAdapter(albumNewList);
 
         newAlbumsRecyclerView.setAdapter(mAdapter);
 
     }
 
-    private class newAlbumHolder extends RecyclerView.ViewHolder{
+    private class newAlbumHolder extends RecyclerView.ViewHolder {
 
         private ImageView album_image;
         private TextView album_title;
@@ -100,14 +100,14 @@ public class BrowseFragment extends Fragment {
             album_artists = itemView.findViewById(R.id.new_artist_name);
         }
 
-        private void bindAlbum(AlbumNew albumNew){
+        private void bindAlbum(AlbumNew albumNew) {
             final String title = albumNew.getTitle();
             String img_url = albumNew.getImg_url();
 
             StringBuilder sb = new StringBuilder();
 
             List<String> artists = albumNew.getArtists();
-            for(String s : artists){
+            for (String s : artists) {
                 sb.append(s + ", ");
             }
 
@@ -116,7 +116,7 @@ public class BrowseFragment extends Fragment {
             int index = artist.lastIndexOf(",");
             artist = artist.substring(0, index);
 
-            if(artist.length() > 30){
+            if (artist.length() > 30) {
                 artist = artist.substring(0, 30);
                 artist += "...";
             }
@@ -144,7 +144,7 @@ public class BrowseFragment extends Fragment {
         }
     }
 
-    private class newAlbumAdapter extends RecyclerView.Adapter<newAlbumHolder>{
+    private class newAlbumAdapter extends RecyclerView.Adapter<newAlbumHolder> {
 
         private List<AlbumNew> albumNewsList;
 

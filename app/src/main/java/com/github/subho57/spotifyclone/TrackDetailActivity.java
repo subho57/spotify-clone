@@ -1,8 +1,8 @@
 package com.github.subho57.spotifyclone;
 
 import android.graphics.Bitmap;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -31,8 +31,8 @@ public class TrackDetailActivity extends AppCompatActivity {
         final TextView artistView = findViewById(R.id.detail_artist_field);
         final TextView albumView = findViewById(R.id.detail_album_field);
 
-        final TextView cancelView =findViewById(R.id.detail_cancel_button);
-        cancelView.setOnClickListener(new View.OnClickListener(){
+        final TextView cancelView = findViewById(R.id.detail_cancel_button);
+        cancelView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -62,18 +62,18 @@ public class TrackDetailActivity extends AppCompatActivity {
         String album = detailMusic.getAlbum();
         String artist = detailMusic.getArtist();
 
-        if(title.length() > 40){
+        if (title.length() > 40) {
             title = title.substring(0, 40);
             title += "...";
         }
 
-        if(album.length() > 40){
-            album = album.substring(0,40);
+        if (album.length() > 40) {
+            album = album.substring(0, 40);
             album += "...";
         }
 
-        if(artist.length() > 40){
-            artist = artist.substring(0,40);
+        if (artist.length() > 40) {
+            artist = artist.substring(0, 40);
             artist += "...";
         }
 

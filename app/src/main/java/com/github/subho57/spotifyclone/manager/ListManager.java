@@ -27,15 +27,7 @@ public class ListManager {
     private String current_playing_title;
     private String current_playing_album;
 
-    public static ListManager getInstance(){
-        if(listManager == null){
-            listManager = new ListManager();
-        }
-
-        return listManager;
-    }
-
-    private ListManager(){
+    private ListManager() {
         trackLists = new ArrayList<>();
         artistSearches = new ArrayList<>();
         albumNewArrayList = new ArrayList<>();
@@ -47,36 +39,44 @@ public class ListManager {
         current_playing_album = null;
     }
 
-    public ArrayList<SimplePlaylist> getSimplePlaylists(){
+    public static ListManager getInstance() {
+        if (listManager == null) {
+            listManager = new ListManager();
+        }
+
+        return listManager;
+    }
+
+    public ArrayList<SimplePlaylist> getSimplePlaylists() {
         return simplePlaylists;
     }
 
-    public void addSimpleList(SimplePlaylist simple){
+    public void addSimpleList(SimplePlaylist simple) {
         simplePlaylists.add(simple);
     }
 
-    public ArrayList<TopTrack> getTopTracks(){
+    public ArrayList<TopTrack> getTopTracks() {
         return topTracks;
     }
 
-    public void addTopTrack(TopTrack track){
+    public void addTopTrack(TopTrack track) {
 
         topTracks.add(track);
     }
 
-    public void addTopArtist(TopArtist artist){
+    public void addTopArtist(TopArtist artist) {
         topArtists.add(artist);
     }
 
-    public ArrayList<TopArtist> getTopArtists(){
+    public ArrayList<TopArtist> getTopArtists() {
         return topArtists;
     }
 
-    public void addNewAlbum(AlbumNew albumNew){
+    public void addNewAlbum(AlbumNew albumNew) {
         albumNewArrayList.add(albumNew);
     }
 
-    public ArrayList<AlbumNew> getAlbumNewArrayList(){
+    public ArrayList<AlbumNew> getAlbumNewArrayList() {
         return albumNewArrayList;
     }
 
@@ -84,19 +84,17 @@ public class ListManager {
         return artistSearches;
     }
 
-    public void addArtist(ArtistSearch search){
+    public void addArtist(ArtistSearch search) {
 
         ArtistSearch found = null;
 
-        for(ArtistSearch artistSearch : artistSearches)
-        {
-            if(artistSearch.getName().equals(search.getName()))
-            {
+        for (ArtistSearch artistSearch : artistSearches) {
+            if (artistSearch.getName().equals(search.getName())) {
                 found = artistSearch;
             }
         }
 
-        if(found != null)
+        if (found != null)
             artistSearches.remove(found);
 
         artistSearches.add(0, search);
@@ -106,17 +104,17 @@ public class ListManager {
         return trackLists;
     }
 
-    public void addTrack(Music music){
+    public void addTrack(Music music) {
         trackLists.add(music);
     }
 
-    public void clearList(){
+    public void clearList() {
         trackLists.clear();
     }
 
-    public Music findCurrentMusic(String title, String album){
-        for(Music m : trackLists){
-            if(m.getTitle().equals(title) && m.getAlbum().equals(album)){
+    public Music findCurrentMusic(String title, String album) {
+        for (Music m : trackLists) {
+            if (m.getTitle().equals(title) && m.getAlbum().equals(album)) {
                 return m;
             }
         }

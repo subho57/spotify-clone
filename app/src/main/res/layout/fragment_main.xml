@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:background="@color/colorPrimaryDark"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main_fragment"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical">
 
 
     <FrameLayout
@@ -15,7 +15,7 @@
         <FrameLayout
             android:id="@+id/fragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
     </FrameLayout>
 
     <LinearLayout
@@ -26,145 +26,143 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:gravity="center"
             android:background="@color/colorBottomNavBar"
-            android:textColor="#ffffff"
-            android:text="PLAYER FIELD"/>
+            android:gravity="center"
+            android:text="PLAYER FIELD"
+            android:textColor="#ffffff" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
-            android:padding="5dp"
             android:background="@color/colorBottomNavBar"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="5dp">
 
             <LinearLayout
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/nav_home"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/ic_home_black_24dp"/>
+                    android:background="@drawable/ic_home_black_24dp" />
 
                 <TextView
                     android:id="@+id/nav_home_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textSize="12sp"
-                    android:textAlignment="center"
                     android:layout_gravity="center"
-                    android:textColor="@color/colorNavIcon"
                     android:layout_marginTop="-4dp"
-                    android:text="Home"/>
+                    android:text="Home"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorNavIcon"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/nav_browse"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/ic_open_in_browser_black_24dp"/>
+                    android:background="@drawable/ic_open_in_browser_black_24dp" />
 
                 <TextView
                     android:id="@+id/nav_browse_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textSize="12sp"
-                    android:textAlignment="center"
                     android:layout_gravity="center"
-                    android:textColor="@color/colorNavIcon"
                     android:layout_marginTop="-4dp"
-                    android:text="Browse"/>
+                    android:text="Browse"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorNavIcon"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/nav_search"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/ic_search_black_24dp"/>
+                    android:background="@drawable/ic_search_black_24dp" />
 
                 <TextView
                     android:id="@+id/nav_search_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textSize="12sp"
-                    android:textAlignment="center"
                     android:layout_gravity="center"
-                    android:textColor="@color/colorNavIcon"
                     android:layout_marginTop="-4dp"
-                    android:text="Search"/>
+                    android:text="Search"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorNavIcon"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/nav_radio"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/ic_radio_black_24dp"/>
+                    android:background="@drawable/ic_radio_black_24dp" />
 
                 <TextView
                     android:id="@+id/nav_radio_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textSize="12sp"
-                    android:textAlignment="center"
                     android:layout_gravity="center"
-                    android:textColor="@color/colorNavIcon"
                     android:layout_marginTop="-4dp"
-                    android:text="Radio"/>
+                    android:text="Radio"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorNavIcon"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/nav_library"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/ic_library_music_black_24dp"/>
+                    android:background="@drawable/ic_library_music_black_24dp" />
 
                 <TextView
                     android:id="@+id/nav_library_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textSize="12sp"
-                    android:textAlignment="center"
                     android:layout_gravity="center"
-                    android:textColor="@color/colorNavIcon"
                     android:layout_marginTop="-4dp"
-                    android:text="Your Library"/>
+                    android:text="Your Library"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorNavIcon"
+                    android:textSize="12sp" />
             </LinearLayout>
-
-
 
 
         </LinearLayout>
