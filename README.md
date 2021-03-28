@@ -1,20 +1,16 @@
-**This project is paused!!** 🙏
-
-Some components may not work and some packages/dependencies are deprecated. 
-
-# spotify-demo
+# Spotify Clone
 Music player app using the Spotify Android SDK and Spotify Web API.
 
-[![Screenshot](screenshot/screens.png)](https://github.com/junlee91/android-spotify-demo/blob/master/screenshot/screens.png)
+[![Screenshot](screenshot/screens.png)](https://github.com/subho57/spotify-clone/blob/main/screenshot/screens.png)
 
 
 ## Getting Started
 - Clone this repo:
 ```sh
-https://github.com/junlee91/android-spotify-demo.git
+https://github.com/subho57/spotify-clone.git
 ```
 - Open the project in Android Studio
-- Make sure to have `buildToolsVersion "26.0.2"`
+- Make sure to have `buildToolsVersion "30.0.3"`
 
 ## Installing Spotify Android SDK
 You can follow the [Spotify Android SDK Tutorial](https://developer.spotify.com/technologies/spotify-android-sdk/tutorial/) to start the set up.
