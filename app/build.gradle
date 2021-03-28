@@ -9,12 +9,12 @@ android {
             keyPassword 'subhankar@123'
         }
     }
-    compileSdkVersion 28
-    buildToolsVersion '28.0.3'
+    compileSdkVersion 30
+    buildToolsVersion '30.0.3'
     defaultConfig {
         applicationId "com.github.subho57.spotifyclone"
         minSdkVersion 23
-        targetSdkVersion 28
+        targetSdkVersion 30
         versionCode 2
         versionName '2.0'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
