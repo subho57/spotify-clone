@@ -1,7 +1,7 @@
 package com.github.subho57.spotifyclone.model;
 
 /**
- * Created by jun on 1/3/18.
+ * Created by subho57
  */
 
 public class TopTrack {

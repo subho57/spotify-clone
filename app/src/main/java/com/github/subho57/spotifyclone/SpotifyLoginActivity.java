@@ -20,10 +20,8 @@ public class SpotifyLoginActivity extends AppCompatActivity {
     //  \____\___/|_| |_|___/\__\__,_|_| |_|\__|___/
     //
 
-    @SuppressWarnings("SpellCheckingInspection")
     public static final String CLIENT_ID = "fe38b5c6ece347b28b592f7e96728201";
     public static final String AUTH_TOKEN = "AUTH_TOKEN";
-    @SuppressWarnings("SpellCheckingInspection")
     private static final String REDIRECT_URI = "https://subho57.ninja";
     private static final String TAG = "Spotify " + SpotifyLoginActivity.class.getSimpleName();
     /**
@@ -61,7 +59,7 @@ public class SpotifyLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spotify_login);
 
-        Button mLoginButton = (Button) findViewById(R.id.login_button);
+        Button mLoginButton = findViewById(R.id.login_button);
         mLoginButton.setOnClickListener(mListener);
 
     }

@@ -164,7 +164,6 @@ public class MainFragment extends Fragment {
         library = getResources().getDrawable(R.drawable.ic_library_music_black_24dp, null);
 
         focusMode = getResources().getColor(R.color.colorWhite, null);
-        ;
         defocusMode = getResources().getColor(R.color.colorNavIcon, null);
     }
 

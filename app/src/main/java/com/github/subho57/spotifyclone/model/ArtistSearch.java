@@ -3,7 +3,7 @@ package com.github.subho57.spotifyclone.model;
 import android.graphics.Bitmap;
 
 /**
- * Created by jun on 1/2/18.
+ * Created by subho57
  */
 
 public class ArtistSearch {

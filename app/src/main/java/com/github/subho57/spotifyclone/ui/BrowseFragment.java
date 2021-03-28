@@ -108,7 +108,7 @@ public class BrowseFragment extends Fragment {
 
             List<String> artists = albumNew.getArtists();
             for (String s : artists) {
-                sb.append(s + ", ");
+                sb.append(s).append(", ");
             }
 
             String artist = sb.toString();
