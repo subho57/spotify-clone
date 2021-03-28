@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">spotify-demo</string>
+    <string name="app_name">Spotify Clone</string>
 
     <string name="create_account">CREATE ACCOUNT</string>
     <string name="already_user">Already a user?</string>

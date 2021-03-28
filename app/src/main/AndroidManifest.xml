@@ -23,7 +23,7 @@
             android:name="com.spotify.sdk.android.authentication.LoginActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".SpotifyLoginActivity" />
-        <activity android:name=".TrackDetailActivity"></activity>
+        <activity android:name=".TrackDetailActivity" />
     </application>
 
 </manifest>
